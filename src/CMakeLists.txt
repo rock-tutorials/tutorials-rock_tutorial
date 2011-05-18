@@ -1,6 +1,9 @@
-rock_library(rock_tutorial_viz
-    SOURCES dummy.cpp)
+rock_library(rocktutorial-viz
+    SOURCES RockVisualization.cpp
+    HEADERS RockVisualization.hpp
+    DEPS_PKGCONFIG base-types vizkit
+)
 
-rock_executable(rock_tutorial_viz_bin main.cpp
-    DEPS rock_tutorial_viz)
+#rock_executable(rock_tutorial-viz_bin main.cpp
+#    DEPS rocktutorial-viz)
 

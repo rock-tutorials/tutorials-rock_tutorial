@@ -1,19 +1,19 @@
 <package>
-  <description brief="Rock Tutorial visualization using vizkit">
+  <description brief="rock tutorial visualization using vizkit">
   
   </description>
-  <author>Sascha Arnold/sirius@tzi.de/</author>
+  <author>Sascha Arnold/sascha.arnold@dfki.de/</author>
   <license></license>
   <url>http://</url>
   <logo>http://</logo>
- <!--
-   To add any dependencies use the depend tag
-  <depend package="dummy-dependency-0" />
-	...
-  <depend package="dummy-dependency-n-1" />
-  <depend package="dummy-dependency-n" />
--->
-<!--DEPEND-ENTRY-->
+
+  <!-- rock library dependencies -->
+  <depend package="gui/vizkit" />
+  <depend package="base/types" />
+
+  <!-- os dependencies -->
+  <rosdep name="osg" />
+
   <versioncontrol type="git" url="" />
   <export>
     <cpp cflags="" lflags="" />
