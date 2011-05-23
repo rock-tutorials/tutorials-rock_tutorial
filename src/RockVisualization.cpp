@@ -15,8 +15,11 @@ osg::ref_ptr< osg::Node > RockVisualization::createMainNode()
 {
     osg::ref_ptr<osg::Group> mainNode = new osg::Group();
     
+    osg::ref_ptr<osg::PositionAttitudeTransform> rockModelOffset = new osg::PositionAttitudeTransform();
     rockModelPos = new osg::PositionAttitudeTransform();
-    mainNode->addChild(rockModelPos);
+    rockModelOffset->addChild(rockModelPos);
+    rockModelOffset->setPosition(osg::Vec3d(0.0, 0.0, 0.35));
+    mainNode->addChild(rockModelOffset);
     
     // get rock model
     char* osgPath = getenv("OSG_FILE_PATH");
@@ -38,9 +41,9 @@ osg::ref_ptr< osg::Node > RockVisualization::createMainNode()
 
 osg::ref_ptr<osg::Node> RockVisualization::printPrimitivModel()
 {
-    osg::ref_ptr<osg::Sphere> sp = new osg::Sphere(osg::Vec3d(0,0,0.2), 0.2);
+    osg::ref_ptr<osg::Sphere> sp = new osg::Sphere(osg::Vec3d(0,0,0), 0.35);
     osg::ref_ptr<osg::ShapeDrawable> sd = new osg::ShapeDrawable(sp.get());
-    sd->setColor(osg::Vec4(1.0f, 1.0f, 1.0f, 1.0f));
+    sd->setColor(osg::Vec4(0.5f, 0.5f, 0.5f, 1.0f));
     osg::ref_ptr<osg::Geode> spGeode = new osg::Geode();
     spGeode->addDrawable(sd.get());
     return spGeode;
