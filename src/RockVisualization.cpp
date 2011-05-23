@@ -8,6 +8,9 @@ namespace vizkit
 
 RockVisualization::RockVisualization()
 {   
+    /* Makes a method updatePose availabe on ruby side, which is will call
+     * the updateData method for the data type base::Pose.
+     * This macro is optional. */ 
     VizPluginRubyAdapter(RockVisualization, base::Pose, Pose)
 }
 
@@ -15,6 +18,7 @@ osg::ref_ptr< osg::Node > RockVisualization::createMainNode()
 {
     osg::ref_ptr<osg::Group> mainNode = new osg::Group();
     
+    //correct the offset of the model
     osg::ref_ptr<osg::PositionAttitudeTransform> rockModelOffset = new osg::PositionAttitudeTransform();
     rockModelPos = new osg::PositionAttitudeTransform();
     rockModelOffset->addChild(rockModelPos);
@@ -29,6 +33,7 @@ osg::ref_ptr< osg::Node > RockVisualization::createMainNode()
         filePath += "/rock.osg";
         rockModel = osgDB::readNodeFile(filePath);
     }
+    // print primitiv model if rock.osg was not found
     if (rockModel.get() == 0)
     {
         rockModel = printPrimitivModel();
@@ -39,6 +44,9 @@ osg::ref_ptr< osg::Node > RockVisualization::createMainNode()
     return mainNode;
 }
 
+/**
+ * This method provides a primitive model which is a simple sphere.
+ */
 osg::ref_ptr<osg::Node> RockVisualization::printPrimitivModel()
 {
     osg::ref_ptr<osg::Sphere> sp = new osg::Sphere(osg::Vec3d(0,0,0), 0.35);
@@ -56,6 +64,7 @@ void RockVisualization::updateDataIntern ( const base::Pose& data )
 
 void RockVisualization::updateMainNode( osg::Node* node )
 {
+    //set actual position and orientation to the osg model
     position.set(pose.position.x(), pose.position.y(), pose.position.z());
     orientation.set(pose.orientation.x(), pose.orientation.y(), pose.orientation.z(), pose.orientation.w());
     rockModelPos->setPosition(position);

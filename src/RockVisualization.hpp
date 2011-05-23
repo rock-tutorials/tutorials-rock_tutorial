@@ -19,6 +19,7 @@ class RockVisualization: public vizkit::VizPlugin<base::Pose>
         virtual osg::ref_ptr<osg::Node> createMainNode();
 	virtual void updateMainNode( osg::Node* node );
 	void updateDataIntern ( const base::Pose& data );
+        
         osg::ref_ptr<osg::Node> printPrimitivModel();
         
         base::Pose pose;
@@ -28,6 +29,7 @@ class RockVisualization: public vizkit::VizPlugin<base::Pose>
         osg::ref_ptr<osg::Node> rockModel;
 };
 
+//Macro that makes this plugin loadable in ruby, this is optional.
 VizkitQtPlugin(RockVisualization)
 
 }
