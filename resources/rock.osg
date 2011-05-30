@@ -5,8 +5,31 @@ Group {
   num_children 1
   Geode {
     name "Mball"
-    nodeMask 0xffffffff
+    nodeMask 0xffffffff              
     cullingActive TRUE
+    StateSet {
+      rendering_hint DEFAULT_BIN
+      renderBinMode INHERIT
+      textureUnit 0 {
+        GL_TEXTURE_2D ON
+        Texture2D {
+          DataVariance DYNAMIC
+          file "rock.png"
+          wrap_s CLAMP
+          wrap_t CLAMP
+          wrap_r CLAMP
+          min_filter LINEAR_MIPMAP_LINEAR
+          mag_filter LINEAR
+          maxAnisotropy 1
+          borderColor 0 0 0 0
+          borderWidth 0
+          useHardwareMipMapGeneration TRUE
+          unRefImageDataAfterApply FALSE
+          internalFormatMode USE_IMAGE_DATA_FORMAT
+          resizeNonPowerOfTwo TRUE
+        }
+      }
+    }
     num_drawables 1
     Geometry {
       DataVariance STATIC

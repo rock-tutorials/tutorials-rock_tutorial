@@ -2,13 +2,14 @@
 #include <osg/Geometry>
 #include <osg/ShapeDrawable>
 #include <osgDB/ReadFile>
+#include <osg/Texture2D>
 
 namespace vizkit 
 {
 
 RockVisualization::RockVisualization()
 {   
-    /* Makes a method updatePose availabe on ruby side, which is will call
+    /* Makes a method updatePose availabe on ruby side, which will call
      * the updateData method for the data type base::Pose.
      * This macro is optional. */ 
     VizPluginRubyAdapter(RockVisualization, base::Pose, Pose)
@@ -54,6 +55,32 @@ osg::ref_ptr<osg::Node> RockVisualization::printPrimitivModel()
     sd->setColor(osg::Vec4(0.5f, 0.5f, 0.5f, 1.0f));
     osg::ref_ptr<osg::Geode> spGeode = new osg::Geode();
     spGeode->addDrawable(sd.get());
+    
+    // get rock texture
+    char* osgPath = getenv("OSG_FILE_PATH");
+    if (osgPath) 
+    {
+        std::string imgPath(osgPath);
+        imgPath += "/rock.png";
+        osg::Image* image = osgDB::readImageFile(imgPath);
+        if (!image)
+        {
+            std::cout << "couldn't find texture rock.png" << std::endl;
+        }
+        else
+        {
+            osg::Texture2D* texture = new osg::Texture2D;
+            texture->setDataVariance(osg::Object::DYNAMIC); 
+            texture->setImage(image);
+            osg::StateSet* stateOne = new osg::StateSet();
+
+            stateOne->setTextureAttributeAndModes
+                (0,texture,osg::StateAttribute::ON);
+
+            spGeode->setStateSet(stateOne);
+        }
+    }
+    
     return spGeode;
 }
 

@@ -7,9 +7,10 @@ rock_library(rock_tutorial-viz
 # install osg file
 install(FILES
     ../resources/rock.osg
+    ../resources/rock.png
     DESTINATION share/vizkit
     )
 
 #rock_executable(rock_tutorial-viz_bin main.cpp
-#    DEPS rocktutorial-viz)
+#    DEPS rock_tutorial-viz)
 
