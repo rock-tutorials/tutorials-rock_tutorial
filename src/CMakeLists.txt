@@ -1,8 +1,6 @@
-rock_library(rock_tutorial-viz
-    SOURCES RockVisualization.cpp
-    HEADERS RockVisualization.hpp
-    DEPS_PKGCONFIG base-types vizkit
-)
+rock_vizkit_plugin(rock_tutorial-viz
+    RockVisualization.cpp
+    HEADERS RockVisualization.hpp)
 
 # install osg file
 install(FILES
