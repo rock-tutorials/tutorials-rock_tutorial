@@ -3,6 +3,7 @@
 #include <osg/ShapeDrawable>
 #include <osgDB/ReadFile>
 #include <osg/Texture2D>
+#include <osgText/Text>
 
 namespace vizkit 
 {
@@ -13,6 +14,12 @@ RockVisualization::RockVisualization()
      * the updateData method for the data type base::Pose.
      * This macro is optional. */ 
     VizPluginRubyAdapter(RockVisualization, base::Pose, Pose)
+    
+    /* This macro makes the method 'activateRockLabel' with a bool attribute
+     * availabe in ruby, for configuration purposes */
+    VizPluginRubyConfig(RockVisualization, bool, activateRockLabel)
+    
+    rockLabelActivated = false;
 }
 
 osg::ref_ptr< osg::Node > RockVisualization::createMainNode()
@@ -41,6 +48,13 @@ osg::ref_ptr< osg::Node > RockVisualization::createMainNode()
     }
     
     rockModelPos->addChild(rockModel);
+    
+    if (rockLabelActivated)
+    {
+        // print a label that hovers over the rock
+        rockLabel = printRockLabel();
+        rockModelPos->addChild(rockLabel);
+    }
     
     return mainNode;
 }
@@ -82,6 +96,33 @@ osg::ref_ptr<osg::Node> RockVisualization::printPrimitivModel()
     }
     
     return spGeode;
+}
+
+/**
+ * This method just provides a label.
+ */
+osg::ref_ptr<osg::Node> RockVisualization::printRockLabel()
+{
+       osg::ref_ptr<osgText::Text> label = new osgText::Text();
+       osg::ref_ptr<osg::Geode> labelGeode = new osg::Geode();
+
+       labelGeode->addDrawable(label);
+
+       label->setCharacterSize(2);
+       label->setText("Rock Tutorial");
+       label->setAxisAlignment(osgText::Text::XZ_PLANE);
+
+       label->setDrawMode(osgText::Text::TEXT);
+       label->setAlignment(osgText::Text::CENTER_TOP);
+       label->setPosition( osg::Vec3(0,0,1.5) );
+       label->setColor( osg::Vec4(1.0f, 0.0f, 0.0f, 1.0f) );
+
+       return labelGeode;
+}
+
+void RockVisualization::activateRockLabel(bool b)
+{
+    rockLabelActivated = b;
 }
 
 void RockVisualization::updateDataIntern ( const base::Pose& data )
