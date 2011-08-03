@@ -8,7 +8,15 @@
 namespace vizkit 
 {
 
+struct RockVisualization::Data {
+    // Copy of the value given to updateDataIntern.
+    //
+    // Making a copy is required because of how OSG works
+    base::Pose data;
+};
+
 RockVisualization::RockVisualization()
+    : p(new Data)
 {   
     /* Makes a method updatePose availabe on ruby side, which will call
      * the updateData method for the data type base::Pose.
@@ -20,6 +28,11 @@ RockVisualization::RockVisualization()
     VizPluginRubyConfig(RockVisualization, bool, activateRockLabel)
     
     rockLabelActivated = false;
+}
+
+RockVisualization::~RockVisualization()
+{
+    delete p;
 }
 
 osg::ref_ptr< osg::Node > RockVisualization::createMainNode()
@@ -77,11 +90,7 @@ osg::ref_ptr<osg::Node> RockVisualization::printPrimitivModel()
         std::string imgPath(osgPath);
         imgPath += "/rock.png";
         osg::Image* image = osgDB::readImageFile(imgPath);
-        if (!image)
-        {
-            std::cout << "couldn't find texture rock.png" << std::endl;
-        }
-        else
+        if (image)
         {
             osg::Texture2D* texture = new osg::Texture2D;
             texture->setDataVariance(osg::Object::DYNAMIC); 
@@ -103,21 +112,21 @@ osg::ref_ptr<osg::Node> RockVisualization::printPrimitivModel()
  */
 osg::ref_ptr<osg::Node> RockVisualization::printRockLabel()
 {
-       osg::ref_ptr<osgText::Text> label = new osgText::Text();
-       osg::ref_ptr<osg::Geode> labelGeode = new osg::Geode();
+    osg::ref_ptr<osgText::Text> label = new osgText::Text();
+    osg::ref_ptr<osg::Geode> labelGeode = new osg::Geode();
 
-       labelGeode->addDrawable(label);
+    labelGeode->addDrawable(label);
 
-       label->setCharacterSize(2);
-       label->setText("Rock Tutorial");
-       label->setAxisAlignment(osgText::Text::XZ_PLANE);
+    label->setCharacterSize(2);
+    label->setText("Rock Tutorial");
+    label->setAxisAlignment(osgText::Text::XZ_PLANE);
 
-       label->setDrawMode(osgText::Text::TEXT);
-       label->setAlignment(osgText::Text::CENTER_TOP);
-       label->setPosition( osg::Vec3(0,0,1.5) );
-       label->setColor( osg::Vec4(1.0f, 0.0f, 0.0f, 1.0f) );
+    label->setDrawMode(osgText::Text::TEXT);
+    label->setAlignment(osgText::Text::CENTER_TOP);
+    label->setPosition( osg::Vec3(0,0,1.5) );
+    label->setColor( osg::Vec4(1.0f, 0.0f, 0.0f, 1.0f) );
 
-       return labelGeode;
+    return labelGeode;
 }
 
 void RockVisualization::activateRockLabel(bool b)
@@ -125,16 +134,16 @@ void RockVisualization::activateRockLabel(bool b)
     rockLabelActivated = b;
 }
 
-void RockVisualization::updateDataIntern ( const base::Pose& data )
+void RockVisualization::updateDataIntern ( base::Pose const& value )
 {
-    pose = data;
+    p->data = value;
 }
 
 void RockVisualization::updateMainNode( osg::Node* node )
 {
     //set actual position and orientation to the osg model
-    position.set(pose.position.x(), pose.position.y(), pose.position.z());
-    orientation.set(pose.orientation.x(), pose.orientation.y(), pose.orientation.z(), pose.orientation.w());
+    position.set(p->data.position.x(), p->data.position.y(), p->data.position.z());
+    orientation.set(p->data.orientation.x(), p->data.orientation.y(), p->data.orientation.z(), p->data.orientation.w());
     rockModelPos->setPosition(position);
     rockModelPos->setAttitude(orientation);
 }
