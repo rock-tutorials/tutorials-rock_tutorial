@@ -4,16 +4,10 @@ require 'vizkittypelib'
 include Orocos
 Orocos.initialize
 
-# loading all base types
-Orocos::CORBA.load_typekit('base')
-
 # create an instance of the vizkit main window
 # alternatively vizkit::QVizkitWidget could also be used
 widget = Vizkit.default_loader.create_widget("vizkit::QVizkitMainWindow")
 plugin = widget.createPlugin("rock_tutorial", "RockVisualization")
-
-# use a configuration method of the plugin to activate a label
-#plugin.activateRockLabel(true)
 
 # create an instance of the base type Pose
 bodyState = Types::Base::Pose.new
