@@ -2,15 +2,16 @@
 #define ROCKVISUALIZATION_H
 
 #include <boost/noncopyable.hpp>
-#include <vizkit/VizPlugin.hpp>
 #include <osg/Geode>
+#include <osg/Node>
 #include <osg/PositionAttitudeTransform>
 #include <base/pose.h>
+#include <vizkit/Vizkit3DPlugin.hpp>
 
 namespace vizkit 
 {
     class RockVisualization 
-        : public vizkit::VizPlugin<base::Pose>
+        : public vizkit::Vizkit3DPlugin<base::Pose>
         , boost::noncopyable
     {
     public:
