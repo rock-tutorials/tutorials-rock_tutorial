@@ -6,7 +6,7 @@
 
 namespace rock_tutorial
 {
-    struct BearingHeadingSensor
+    struct BearingDistanceSensor
     {
         base::Time time;
         base::Angle bearing;
