@@ -5,13 +5,13 @@
 #include <osg/Geode>
 #include <osg/Node>
 #include <osg/PositionAttitudeTransform>
-#include <base/pose.h>
+#include <base/samples/rigid_body_state.h>
 #include <vizkit/Vizkit3DPlugin.hpp>
 
 namespace vizkit 
 {
     class RockVisualization 
-        : public vizkit::Vizkit3DPlugin<base::Pose>
+        : public vizkit::Vizkit3DPlugin<base::samples::RigidBodyState>
         , boost::noncopyable
     {
     public:
@@ -21,7 +21,7 @@ namespace vizkit
     protected:
         virtual osg::ref_ptr<osg::Node> createMainNode();
         virtual void updateMainNode( osg::Node* node );
-        virtual void updateDataIntern ( base::Pose const& value );
+        virtual void updateDataIntern ( base::samples::RigidBodyState const& value );
         
         osg::ref_ptr<osg::Node> printPrimitivModel();
         

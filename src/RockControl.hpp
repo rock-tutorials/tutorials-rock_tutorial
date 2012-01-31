@@ -2,7 +2,7 @@
 #define ROCKCONTROL_H
 
 #include <base/motion_command.h>
-#include <base/pose.h>
+#include <base/samples/rigid_body_state.h>
 
 namespace rock_tutorial {
 
@@ -13,12 +13,12 @@ public:
     RockControl();
     virtual ~RockControl();
     
-    base::Pose computeNextPose(const double &deltaTime, const base::MotionCommand2D &command);
+    base::samples::RigidBodyState computeNextPose(const double &deltaTime, const base::MotionCommand2D &command);
 
 private:
     void constrainAngle(double& angle);
     void constrainValues(base::MotionCommand2D& motionCommand);
-    base::Pose currentPose;
+    base::samples::RigidBodyState currentPose;
     double currentHeading;
     double currentRoll;
     double taskPeriod;

@@ -12,7 +12,7 @@ struct RockVisualization::Data {
     // Copy of the value given to updateDataIntern.
     //
     // Making a copy is required because of how OSG works
-    base::Pose data;
+    base::samples::RigidBodyState data;
 };
 
 RockVisualization::RockVisualization()
@@ -21,7 +21,7 @@ RockVisualization::RockVisualization()
     /* Makes a method updatePose availabe on ruby side, which will call
      * the updateData method for the data type base::Pose.
      * This macro is optional. */ 
-    VizPluginRubyAdapter(RockVisualization, base::Pose, Pose)
+    VizPluginRubyAdapter(RockVisualization, base::samples::RigidBodyState, Pose)
 }
 
 RockVisualization::~RockVisualization()
@@ -94,7 +94,7 @@ osg::ref_ptr<osg::Node> RockVisualization::printPrimitivModel()
     return spGeode;
 }
 
-void RockVisualization::updateDataIntern ( base::Pose const& value )
+void RockVisualization::updateDataIntern ( base::samples::RigidBodyState const& value )
 {
     p->data = value;
 }

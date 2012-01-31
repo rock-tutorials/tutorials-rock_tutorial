@@ -48,7 +48,7 @@ void RockControl::constrainValues(base::MotionCommand2D& motionCommand)
         motionCommand.translation = -10;
 }
 
-base::Pose RockControl::computeNextPose(const double &deltaTime, const base::MotionCommand2D &inputCommand)
+base::samples::RigidBodyState RockControl::computeNextPose(const double &deltaTime, const base::MotionCommand2D &inputCommand)
 {
     base::MotionCommand2D command = inputCommand;
     constrainValues(command);
