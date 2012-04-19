@@ -8,7 +8,7 @@ RockControl::RockControl()
     // set variables to zero
     taskPeriod = 0;
     currentHeading = 0;
-    currentRoll = 0;
+    currentPitch = 0;
     currentPose.orientation = base::Quaterniond::Identity();
     currentPose.position = base::Vector3d::Zero();
 }
@@ -57,15 +57,15 @@ base::samples::RigidBodyState RockControl::computeNextPose(const double &deltaTi
     double delta_translation  = command.translation * deltaTime;
     double delta_rotation  = command.rotation * deltaTime;
     
-    // set current yaw and roll
+    // set current yaw and pitch (the rock is rolling)
     currentHeading += delta_rotation;
-    currentRoll += delta_translation * -2;
+    currentPitch += delta_translation * -2;
     constrainAngle(currentHeading);
-    constrainAngle(currentRoll);
+    constrainAngle(currentPitch);
     
     // calculate new absolut values for position and orientation
     currentPose.position += Eigen::AngleAxisd(currentHeading, Eigen::Vector3d::UnitZ()) * Eigen::Vector3d(delta_translation, 0, 0);
-    currentPose.orientation = Eigen::AngleAxisd(currentHeading, Eigen::Vector3d::UnitZ()) * Eigen::AngleAxisd(currentRoll, Eigen::Vector3d::UnitX());
+    currentPose.orientation = Eigen::AngleAxisd(currentHeading, Eigen::Vector3d::UnitZ()) * Eigen::AngleAxisd(currentPitch, Eigen::Vector3d::UnitY());
     currentPose.orientation.normalize();
 
     return currentPose;

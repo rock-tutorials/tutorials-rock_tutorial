@@ -20,7 +20,7 @@ private:
     void constrainValues(base::MotionCommand2D& motionCommand);
     base::samples::RigidBodyState currentPose;
     double currentHeading;
-    double currentRoll;
+    double currentPitch;
     double taskPeriod;
 
 };
