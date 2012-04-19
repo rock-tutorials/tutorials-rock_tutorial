@@ -64,7 +64,7 @@ base::samples::RigidBodyState RockControl::computeNextPose(const double &deltaTi
     constrainAngle(currentRoll);
     
     // calculate new absolut values for position and orientation
-    currentPose.position += Eigen::AngleAxisd(currentHeading, Eigen::Vector3d::UnitZ()) * Eigen::Vector3d(0, delta_translation, 0);
+    currentPose.position += Eigen::AngleAxisd(currentHeading, Eigen::Vector3d::UnitZ()) * Eigen::Vector3d(delta_translation, 0, 0);
     currentPose.orientation = Eigen::AngleAxisd(currentHeading, Eigen::Vector3d::UnitZ()) * Eigen::AngleAxisd(currentRoll, Eigen::Vector3d::UnitX());
     currentPose.orientation.normalize();
 
