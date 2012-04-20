@@ -14,6 +14,8 @@ namespace vizkit
         : public vizkit::Vizkit3DPlugin<base::samples::RigidBodyState>
         , boost::noncopyable
     {
+    Q_OBJECT
+
     public:
         RockVisualization();
         ~RockVisualization();

@@ -1,6 +1,7 @@
 
 rock_vizkit_plugin(rock_tutorial-viz
     RockVisualization.cpp 
+    MOC RockVisualization.hpp
     HEADERS RockVisualization.hpp)
 
 install(FILES
