@@ -19,6 +19,8 @@ namespace vizkit
     public:
         RockVisualization();
         ~RockVisualization();
+        Q_INVOKABLE void updateRigidBodyState(base::samples::RigidBodyState const &value)
+        {Vizkit3DPlugin<base::samples::RigidBodyState>::updateData(value);}
 
     protected:
         virtual osg::ref_ptr<osg::Node> createMainNode();

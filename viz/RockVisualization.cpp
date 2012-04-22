@@ -18,10 +18,6 @@ struct RockVisualization::Data {
 RockVisualization::RockVisualization()
     : p(new Data)
 {   
-    /* Makes a method updatePose availabe on ruby side, which will call
-     * the updateData method for the data type base::Pose.
-     * This macro is optional. */ 
-    VizPluginRubyAdapter(RockVisualization, base::samples::RigidBodyState, RigidBodyState)
 }
 
 RockVisualization::~RockVisualization()
