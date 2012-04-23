@@ -6,11 +6,10 @@ Orocos.initialize
 
 # create an instance of the vizkit main window
 # alternatively vizkit::QVizkitWidget could also be used
-widget = Vizkit.default_loader.create_widget("vizkit::QVizkitMainWindow")
-plugin = widget.createPlugin("rock_tutorial", "RockVisualization")
+plugin = Vizkit.default_loader.RockVisualization
 
 # create an instance of the base type Pose
-bodyState = Types::Base::Pose.new
+bodyState = Types::Base::Samples::RigidBodyState.new
 # set initial values
 bodyState.position.initialize
 bodyState.orientation = Eigen::Quaternion.new(1, 0, 0, 0)
@@ -24,11 +23,10 @@ timer.connect(SIGNAL('timeout()')) do
     j = i / 100.0
     bodyState.position.x = Math::cos(j) * j
     bodyState.position.y = Math::sin(j) * j
-    plugin.updatePose(bodyState)
+    plugin.updateRigidBodyState(bodyState)
 end
 
 # start the timer with a timeout of 10 ms
 timer.start(10)
 
-widget.show
 Vizkit.exec 
