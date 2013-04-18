@@ -15,12 +15,16 @@ public:
     
     base::samples::RigidBodyState computeNextPose(const double &deltaTime, const base::MotionCommand2D &command);
 
+    void setRockRadius(double r) { rockRadius = r; }
+    double getRockRadius() { return rockRadius; }
+
 private:
     void constrainAngle(double& angle);
     void constrainValues(base::MotionCommand2D& motionCommand);
     base::samples::RigidBodyState currentPose;
     double currentHeading;
     double currentPitch;
+    double rockRadius;
 
 };
 

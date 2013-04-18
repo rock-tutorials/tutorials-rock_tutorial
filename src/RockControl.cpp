@@ -10,6 +10,7 @@ RockControl::RockControl()
     currentPitch = 0;
     currentPose.orientation = base::Quaterniond::Identity();
     currentPose.position = base::Vector3d::Zero();
+    rockRadius = 0.5;
 }
 
 RockControl::~RockControl()
@@ -58,7 +59,7 @@ base::samples::RigidBodyState RockControl::computeNextPose(const double &deltaTi
     
     // set current yaw and pitch (the rock is rolling)
     currentHeading += delta_rotation;
-    currentPitch += delta_translation * -2;
+    currentPitch += delta_translation / rockRadius;
     constrainAngle(currentHeading);
     constrainAngle(currentPitch);
     
