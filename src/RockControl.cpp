@@ -6,7 +6,6 @@ namespace rock_tutorial {
 RockControl::RockControl()
 {
     // set variables to zero
-    taskPeriod = 0;
     currentHeading = 0;
     currentPitch = 0;
     currentPose.orientation = base::Quaterniond::Identity();

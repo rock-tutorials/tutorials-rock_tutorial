@@ -21,7 +21,6 @@ private:
     base::samples::RigidBodyState currentPose;
     double currentHeading;
     double currentPitch;
-    double taskPeriod;
 
 };
 
