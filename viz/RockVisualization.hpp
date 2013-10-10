@@ -5,7 +5,7 @@
 #include <osg/Geode>
 #include <osg/Node>
 #include <osg/PositionAttitudeTransform>
-#include <base/samples/RigidBodyState.h>
+#include <base/samples/RigidBodyState.hpp>
 #include <vizkit3d/Vizkit3DPlugin.hpp>
 
 namespace vizkit3d
