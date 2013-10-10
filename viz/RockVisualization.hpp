@@ -5,13 +5,13 @@
 #include <osg/Geode>
 #include <osg/Node>
 #include <osg/PositionAttitudeTransform>
-#include <base/samples/rigid_body_state.h>
-#include <vizkit/Vizkit3DPlugin.hpp>
+#include <base/samples/RigidBodyState.h>
+#include <vizkit3d/Vizkit3DPlugin.hpp>
 
-namespace vizkit 
+namespace vizkit3d
 {
-    class RockVisualization 
-        : public vizkit::Vizkit3DPlugin<base::samples::RigidBodyState>
+    class RockVisualization
+        : public vizkit3d::Vizkit3DPlugin<base::samples::RigidBodyState>
         , boost::noncopyable
     {
     Q_OBJECT

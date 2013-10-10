@@ -5,7 +5,7 @@
 #include <osg/Texture2D>
 #include <osgText/Text>
 
-namespace vizkit 
+namespace vizkit3d
 {
 
 struct RockVisualization::Data {

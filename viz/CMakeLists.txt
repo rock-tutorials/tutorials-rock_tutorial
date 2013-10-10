@@ -7,5 +7,5 @@ rock_vizkit_plugin(rock_tutorial-viz
 install(FILES
     ${PROJECT_SOURCE_DIR}/resources/rock.osg
     ${PROJECT_SOURCE_DIR}/resources/rock.png
-    DESTINATION share/vizkit
+    DESTINATION share/vizkit3d
     )

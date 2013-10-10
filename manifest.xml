@@ -8,7 +8,7 @@
   <logo>http://</logo>
 
   <!-- rock library dependencies -->
-  <depend package="gui/vizkit" />
+  <depend package="gui/vizkit3d" />
   <depend package="base/types" />
 
   <!-- os dependencies -->
