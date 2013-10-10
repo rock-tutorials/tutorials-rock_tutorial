@@ -1,7 +1,8 @@
 
 rock_vizkit_plugin(rock_tutorial-viz
-    RockVisualization.cpp 
+    RockVisualization.cpp
     MOC RockVisualization.hpp
+    DEPS_PKGCONFIG base-types
     HEADERS RockVisualization.hpp)
 
 install(FILES
