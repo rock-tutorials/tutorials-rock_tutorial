@@ -35,7 +35,7 @@ void RockControl::constrainAngle(double& angle)
  * Rotation should be between PI an -PI.
  * Translation should be between 10 and -10.
  */
-void RockControl::constrainValues(base::MotionCommand2D& motionCommand)
+void RockControl::constrainValues(base::commands::Motion2D& motionCommand)
 {
     if (motionCommand.rotation > M_PI)
         motionCommand.rotation = M_PI;
@@ -48,9 +48,9 @@ void RockControl::constrainValues(base::MotionCommand2D& motionCommand)
         motionCommand.translation = -10;
 }
 
-base::samples::RigidBodyState RockControl::computeNextPose(const double &deltaTime, const base::MotionCommand2D &inputCommand)
+base::samples::RigidBodyState RockControl::computeNextPose(const double &deltaTime, const base::commands::Motion2D &inputCommand)
 {
-    base::MotionCommand2D command = inputCommand;
+    base::commands::Motion2D command = inputCommand;
     constrainValues(command);
     
         //translation and rotation relativ to the task period

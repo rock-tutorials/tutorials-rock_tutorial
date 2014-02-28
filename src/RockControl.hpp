@@ -1,8 +1,8 @@
 #ifndef ROCKCONTROL_H
 #define ROCKCONTROL_H
 
-#include <base/motion_command.h>
-#include <base/samples/rigid_body_state.h>
+#include <base/commands/Motion2D.hpp>
+#include <base/samples/RigidBodyState.hpp>
 
 namespace rock_tutorial {
 
@@ -13,14 +13,14 @@ public:
     RockControl();
     virtual ~RockControl();
     
-    base::samples::RigidBodyState computeNextPose(const double &deltaTime, const base::MotionCommand2D &command);
+    base::samples::RigidBodyState computeNextPose(const double &deltaTime, const base::commands::Motion2D &command);
 
     void setRockRadius(double r) { rockRadius = r; }
     double getRockRadius() { return rockRadius; }
 
 private:
     void constrainAngle(double& angle);
-    void constrainValues(base::MotionCommand2D& motionCommand);
+    void constrainValues(base::commands::Motion2D& motionCommand);
     base::samples::RigidBodyState currentPose;
     double currentHeading;
     double currentPitch;
