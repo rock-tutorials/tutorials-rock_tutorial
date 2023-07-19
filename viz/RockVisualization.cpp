@@ -104,4 +104,5 @@ void RockVisualization::updateMainNode( osg::Node* node )
     rockModelPos->setAttitude(orientation);
 }
 
+VizkitQtPluginImpl(RockVisualization)
 }
