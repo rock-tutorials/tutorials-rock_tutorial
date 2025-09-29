@@ -39,5 +39,6 @@ namespace vizkit3d
         Data* p;
     };
 
+VizkitQtPluginHeaderDecls(RockVisualization)
 }
 #endif // ROCKVISUALIZATION_H

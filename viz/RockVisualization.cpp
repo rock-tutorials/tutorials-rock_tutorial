@@ -104,7 +104,5 @@ void RockVisualization::updateMainNode( osg::Node* node )
     rockModelPos->setAttitude(orientation);
 }
 
-//Macro that makes this plugin loadable in ruby, this is optional.
-VizkitQtPlugin(RockVisualization)
-
+VizkitQtPluginImpl(RockVisualization)
 }

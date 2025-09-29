@@ -1,6 +1,13 @@
 
-rock_vizkit_plugin(rock_tutorial-viz
-    RockVisualization.cpp
+rock_find_qt5(OPTIONAL)
+rock_find_qt4(OPTIONAL)
+
+include(RockQt)
+
+rock_qt_vizkit_plugin(
+    TARGETPREFIX rock_tutorial-viz
+    QT4_SUFFIX ""
+    SOURCES RockVisualization.cpp
     MOC RockVisualization.hpp
     DEPS_PKGCONFIG base-types
     HEADERS RockVisualization.hpp)
